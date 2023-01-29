@@ -1,0 +1,14 @@
+@font-face {
+  font-family: Burtons Nightmare;
+  src: url("./font/NITEMARE.TTF");
+}
+@font-face {
+  font-family: GoblinHand;
+  src: url("./font/VTCGoblinHandSC.ttf");
+}
+.title {
+  font-family: Burtons Nightmare;
+}
+.list {
+  font-family: GoblinHand;
+}

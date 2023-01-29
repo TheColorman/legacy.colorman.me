@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sketch</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+
+    <style>
+      * {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+}
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+    margin-bottom: 5%;
+  }
+
+.sliders {
+  position: fixed;
+  top: 2%;
+  right: 2%;
+  width: 15%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 30px;
+    border-radius: 5rem;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #1286c4;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #1286c4;
+    cursor: pointer;
+  }
+
+  @font-face{
+    font-family: "Gravity";
+    src: url("Rheiborn_Sans_Clean.ttf")
+  }
+
+  p{
+    font-family: "Gravity";
+    font-size: 20px;
+  }
+
+/* The slider */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sliderbox {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.sliderbox:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .sliderbox {
+  background-color: #2196F3;
+}
+
+input:focus + .sliderbox {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .sliderbox:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.sliderbox.round {
+  border-radius: 34px;
+}
+
+.sliderbox.round:before {
+  border-radius: 50%;
+}
+    </style>
+  </head>
+
+  <body>
+    <script src="circle.js"></script>
+    <script src="sketch.js"></script>
+    <div class="sliders">
+      <div class="slidecontainer">
+        <p>
+          CIRCLE AMOUNT: 
+          <span id="circleValue">100</span>
+        </p>
+        <input type="range" min="10" max="200" value="100" class="slider" id="circleSlider">
+      </div>
+      <div class="slidecontainer">
+        <div class="slidecontainer">
+          <p>
+            MOUSE FORCE: 
+            <span id="forceValue">10</span>
+          </p>
+          <input type="range" min="0" max="100" value="10" class="slider" id="forceSlider">
+        </div>  
+      </div>
+      <div class="slidecontainer">
+        <div class="slidecontainer">
+          <p>
+            ENERGY EFFICIENCY: 
+            <span id="efficiencyValue">99</span>%
+          </p>
+          <input type="range" min="50" max="200" value="99" class="slider" id="efficiencySlider">
+        </div>  
+      </div>
+      <div class="slidecontainer">
+        <p>SHOW VELOCITY</p>
+        <label class="switch">
+          <input type="checkbox" id="showVelocity">
+          <span class="sliderbox round">
+          </span>
+        </label>
+      </div>
+      <p>PRESS SPACE TO HIDE</p>
+    </div>
+  </body>
+</html>

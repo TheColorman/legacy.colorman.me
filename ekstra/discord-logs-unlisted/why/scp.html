@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="theme-color" content="#ff6ca6">
+    <title>S1M - scp</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+} 
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.quote {
+    margin: 0.5em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment-thumbnail {
+    margin-top: 0.3em;
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/639874642001002498/a_c533d7c35491dbcd4455a9dbc5db4006.png" alt="Guild icon" />
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">S1M</div>
+        <div class="preamble__entry">scp</div>
+
+            <div class="preamble__entry preamble__entry--small">http://www.scp-wiki.net/
+The SCP Foundation is a fictional organization documented by the web-based collaborative-fiction project of the same name. Within the website&#39;s fictional setting, the SCP Foundation is responsible for locating and containing individuals, entities, locations, and objects that violate natural law (referred to as SCPs).</div>
+
+    </div>
+</div>
+
+<div class="chatlog">
+    <div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-20 05:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="686968045993852938" id="message-686968045993852938">
+                <div class="chatlog__content">
+                    <span class="markdown">-sneugle:
+<a href="http://www.reddit.com/r/okbuddyredacted/comments/fgf43y/redacted/?utm_source=share&utm_medium=web2x">http://www.reddit.com/r/okbuddyredacted/comments/fgf43y/redacted/?utm_source=share&amp;utm_medium=web2x</a></span>
+
+                        <span class="chatlog__edited-timestamp" title="10-Mar-20 05:06 PM">(edited)</span>
+                </div>
+
+
+            <div class="chatlog__embed">
+                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,1)"></div>
+                <div class="chatlog__embed-content-container">
+                    <div class="chatlog__embed-content">
+                        <div class="chatlog__embed-text">
+
+                            <div class="chatlog__embed-title">
+                                <a class="chatlog__embed-title-link" href="http://www.reddit.com/r/okbuddyredacted/comments/fgf43y/redacted/?utm_source=share&utm_medium=web2x"><span class="markdown">r/okbuddyredacted - {redacted}</span></a>
+                            </div>
+
+                            <div class="chatlog__embed-description"><span class="markdown">0 votes and 11 comments so far on Reddit</span></div>
+
+                        </div>
+
+                        <div class="chatlog__embed-thumbnail-container">
+                            <a class="chatlog__embed-thumbnail-link" href="https://preview.redd.it/7dvaig4v0vl41.jpg?auto=webp&s=9884f8b3d7578adc3fe227d28f3ba10cf1844962">
+                                <img class="chatlog__embed-thumbnail" src="https://preview.redd.it/7dvaig4v0vl41.jpg?auto=webp&s=9884f8b3d7578adc3fe227d28f3ba10cf1844962" alt="Thumbnail" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/166530197791703040/61cae42e6a0d641b9a46db4a329d545b.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="sneugle#6755" data-user-id="166530197791703040" style="color: #50BF33">Johan</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-20 05:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="686968149241102340" id="message-686968149241102340">
+                <div class="chatlog__content">
+                    <span class="markdown">Secure Contain Protect</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">11-Mar-20 07:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="687189203561218065" id="message-687189203561218065">
+                <div class="chatlog__content">
+                    <span class="markdown"><a href="https://youtu.be/MEOZkf4imaM">https://youtu.be/MEOZkf4imaM</a></span>
+
+                </div>
+
+
+            <div class="chatlog__embed">
+                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                <div class="chatlog__embed-content-container">
+                    <div class="chatlog__embed-content">
+                        <div class="chatlog__embed-text">
+                            <div class="chatlog__embed-author">
+
+                                <span class="chatlog__embed-author-name">
+                                    <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCKER8Eq_LlpnAaEDv96G6YQ">MrKlay</a>
+                                </span>
+                            </div>
+
+                            <div class="chatlog__embed-title">
+                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=MEOZkf4imaM"><span class="markdown">096 | SCP Short Film [4K]</span></a>
+                            </div>
+
+                            <div class="chatlog__embed-description"><span class="markdown">Consider supporting my channel by visiting my Patreon. <a href="https://www.patreon.com/mrklay">https://www.patreon.com/mrklay</a>
+
+After a terrifying and deadly monster escapes from the SCP Foundation, Inspector Arlia interviews Doctor Daniels, the man responsible for containing the creature. At first Daniels uses the i...</span></div>
+
+                        </div>
+
+                        <div class="chatlog__embed-thumbnail-container">
+                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/MEOZkf4imaM/maxresdefault.jpg">
+                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/MEOZkf4imaM/maxresdefault.jpg" alt="Thumbnail" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="687189240563630100" id="message-687189240563630100">
+                <div class="chatlog__content">
+                    <span class="markdown">Short film a year in the making</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">11-Mar-20 08:16 AM</span>
+
+            <div class="chatlog__message " data-message-id="687197255752744974" id="message-687197255752744974">
+                <div class="chatlog__content">
+                    <span class="markdown"><a href="http://www.scp-wiki.net/scp-096">http://www.scp-wiki.net/scp-096</a></span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">12-Mar-20 10:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="687588900599889930" id="message-687588900599889930">
+                <div class="chatlog__content">
+                    <span class="markdown"></span>
+
+                </div>
+
+                <div class="chatlog__attachment">
+                    <a href="https://cdn.discordapp.com/attachments/686968031582093360/687588900369072138/35nbpyn302m41.jpg">
+                        
+                            <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/686968031582093360/687588900369072138/35nbpyn302m41.jpg" alt="Attachment" />
+                    </a>
+                </div>
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/166530197791703040/61cae42e6a0d641b9a46db4a329d545b.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="sneugle#6755" data-user-id="166530197791703040" style="color: #50BF33">Johan</span>
+
+
+        <span class="chatlog__timestamp">12-Mar-20 10:15 AM</span>
+
+            <div class="chatlog__message " data-message-id="687589576931278858" id="message-687589576931278858">
+                <div class="chatlog__content">
+                    <span class="markdown">&quot;Hello fellow hoomans, would you care to open the doors so that I too can escape from the monsters... woof woof bark bark... uh I mean please&quot;</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">17-Mar-20 09:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="689570585474498651" id="message-689570585474498651">
+                <div class="chatlog__content">
+                    <span class="markdown"><a href="https://youtu.be/_iKbSfKANpg">https://youtu.be/_iKbSfKANpg</a></span>
+
+                </div>
+
+
+            <div class="chatlog__embed">
+                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,1)"></div>
+                <div class="chatlog__embed-content-container">
+                    <div class="chatlog__embed-content">
+                        <div class="chatlog__embed-text">
+                            <div class="chatlog__embed-author">
+
+                                <span class="chatlog__embed-author-name">
+                                    <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCOt7_pdSRe-u_RLgPrXC0mw">Cookin With Glass</a>
+                                </span>
+                            </div>
+
+                            <div class="chatlog__embed-title">
+                                <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=_iKbSfKANpg"><span class="markdown">SCP-106 Breaches Containment</span></a>
+                            </div>
+
+
+                        </div>
+
+                        <div class="chatlog__embed-thumbnail-container">
+                            <a class="chatlog__embed-thumbnail-link" href="https://i.ytimg.com/vi/_iKbSfKANpg/maxresdefault.jpg">
+                                <img class="chatlog__embed-thumbnail" src="https://i.ytimg.com/vi/_iKbSfKANpg/maxresdefault.jpg" alt="Thumbnail" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/166530197791703040/61cae42e6a0d641b9a46db4a329d545b.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="sneugle#6755" data-user-id="166530197791703040" style="color: #50BF33">Johan</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-20 04:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="692025740010717254" id="message-692025740010717254">
+                <div class="chatlog__content">
+                    <span class="markdown">UHOH <span class="mention" title="The Colorman#9506">@Alexander</span> THE METAL BALL HAS ARRIVED
+<a href="https://www.reddit.com/r/okbuddyredacted/comments/fo38kj/mtv_cribs_episode_redacted/?utm_source=share&utm_medium=web2x">https://www.reddit.com/r/okbuddyredacted/comments/fo38kj/mtv_cribs_episode_redacted/?utm_source=share&amp;utm_medium=web2x</a></span>
+
+                </div>
+
+
+            <div class="chatlog__embed">
+                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,255,255,1)"></div>
+                <div class="chatlog__embed-content-container">
+                    <div class="chatlog__embed-content">
+                        <div class="chatlog__embed-text">
+
+                            <div class="chatlog__embed-title">
+                                <a class="chatlog__embed-title-link" href="https://www.reddit.com/r/okbuddyredacted/comments/fo38kj/mtv_cribs_episode_redacted/?utm_source=share&utm_medium=web2x"><span class="markdown">r/okbuddyredacted - MTV cribs episode [REDACTED]</span></a>
+                            </div>
+
+                            <div class="chatlog__embed-description"><span class="markdown">9 votes and 0 comments so far on Reddit</span></div>
+
+                        </div>
+
+                        <div class="chatlog__embed-thumbnail-container">
+                            <a class="chatlog__embed-thumbnail-link" href="https://preview.redd.it/q78bmo2nqlo41.jpg?auto=webp&s=0cd00057009ddbf598395933f4c73a855a796bab">
+                                <img class="chatlog__embed-thumbnail" src="https://preview.redd.it/q78bmo2nqlo41.jpg?auto=webp&s=0cd00057009ddbf598395933f4c73a855a796bab" alt="Thumbnail" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-20 04:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="692026238134517882" id="message-692026238134517882">
+                <div class="chatlog__content">
+                    <span class="markdown"><em>furniture time</em></span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/166530197791703040/61cae42e6a0d641b9a46db4a329d545b.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="sneugle#6755" data-user-id="166530197791703040" style="color: #50BF33">Johan</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-20 04:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="692026590556848149" id="message-692026590556848149">
+                <div class="chatlog__content">
+                    <span class="markdown">Heeeeeeeeeeeeeell yeah</span>
+
+                </div>
+
+
+
+            </div>
+    </div>
+</div><div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/298842558610800650/032e49f3e20893fe9ac79e7d723645e8.png" alt="Avatar" />
+    </div>
+    <div class="chatlog__messages">
+    <span class="chatlog__author-name" title="The Colorman#9506" data-user-id="298842558610800650" style="color: #DB3E3F">Alexander</span>
+
+
+        <span class="chatlog__timestamp">05-Apr-20 11:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="696469207445143702" id="message-696469207445143702">
+                <div class="chatlog__content">
+                    <span class="markdown"></span>
+
+                </div>
+
+                <div class="chatlog__attachment">
+                    <a href="https://cdn.discordapp.com/attachments/686968031582093360/696469206853615667/qgkkke7d31r41.mp4">
+                        
+                            Attachment: qgkkke7d31r41.mp4 (2,04 MB)
+                    </a>
+                </div>
+
+
+            </div>
+    </div>
+</div>
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 12 message(s)</div>
+</div>
+
+</body>
+</html>

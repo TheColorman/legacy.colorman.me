@@ -1,0 +1,56 @@
+.mention {
+    border-radius: 4px;
+    padding: 0 3px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+h1 {
+    color:whitesmoke;
+    font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
+}
+h2 {
+    color:whitesmoke; 
+    font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
+}
+h3 {
+    color:whitesmoke; 
+    font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
+}
+
+body {
+    background-color: #36393F;
+}
+
+a {
+    color: #6189DA;
+    font-family: 'Whitney SSm A', 'Whitney SSm B', Arial;
+    text-decoration: none;
+    background-color: #3C414F;
+    border-radius: 4px;
+    padding: 0 3px; 
+    font-weight: 500;
+    
+}
+a:visited { color: #6189DA; }
+a:hover {
+    color: whitesmoke;
+    background-color: #7288D9;
+}
+iframe {
+    border: none;
+    width: 500px;
+    height: 400px;
+    overflow: hidden;
+}
+/* #channels {
+    background-color: #2F3136;
+    width: 500px;
+} */
+#channeliframe {
+    position: relative;
+}
+.content {
+    display: inline-block;
+}

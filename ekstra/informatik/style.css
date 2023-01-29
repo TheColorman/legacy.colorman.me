@@ -1,0 +1,221 @@
+@import "script.js";
+
+body {          /*giver alle "body" elementer (altså hele hjemmesiden) padding 0 og margin 0, hvilket gør at der ikke er en hvid linje i toppen i i siderne*/
+    margin: 0;
+    padding: 0;
+}
+
+ul {    /*ul: samling af links, som er min navigation bar*/
+    list-style-type: none;  /*fjerne bulletpoints*/
+    margin: 0;  /*afstand mellem objekter*/
+    padding: 0; /*afstand mellem elementerne inden i ul*/
+    overflow: hidden;   /*tekst går ikke ud over elementet*/
+    background-color: rgb(0, 63, 105, 0);
+    position: fixed;    /*sidder fast*/
+    top: 0; /*er 0 fra toppen*/
+    width: 100%;    
+    z-index: 2; /*hvor tæt elementet er på skærmen i forhold til andre elementer. Den skal altid være øverst, så tallet skal være større end alle andre elementer*/
+    transition:background-color 200ms ease; /*når jeg ændrer farve med js tager der 200ms at ske*/
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: rgb(0, 0, 0, 0.35);
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.intro {    /*styling for alle elementer med "class=intro"*/
+    background-image: url(./img/virus.png); /*sætter elementet der har class=intro til at have virus som baggrund og indstiller den til at fulde hele skærmen, og at være statisk så den ikke følger med når man scroller.*/
+    background-size: cover; /*gør så at baggrunden kun er 1 billede der fylder det hele*/
+    background-position: top center; /*positionere billedet så det er i midten*/
+    background-attachment: fixed; /*gør så billedet ikke følger med scroll.*/
+
+}
+
+.main { /*styling for alle elementer med "class=main"*/
+    width: 100%;        /*sætter bredden til 100% af elementet den er inden i*/
+    height: 100vh;      /*sætter højden til 100% af skærmen*/
+    position: relative; /*sørger for at teksten inden i .main ikke ender alle mulige forskellige steder*/
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));  /*laver en sort gradient der starter med 35% opacity og slutter med 35% opacity. Den gør effektivt baggrunden mørkere.*/
+}
+
+html {  /*styling for "html" elementet*/
+    font-family: 'Whitney SSm A', 'Whitney SSm B', Arial; /*skrifttype for hjemmesiden*/
+    color: rgba(0, 0, 0, .87);  /*skriftfarve*/
+    margin: 0; /*afstand mellem elementer*/
+    overflow-x: hidden; /*så tekst ikke går ind over andre ting*/
+    max-width: 100%;    /*så hjemmesiden ikke kan være bredere end skærmen, da det ikke ser godt ud*/
+}
+
+.main .title {     /*laver css styling for alle elementer med class="title" som er inden i et element med class="intro"*/
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   /*normalt er den i nederste højre hjørne. Jeg skærer 50% af pladsen fra så den er i midten.*/
+    color: #fff;              /*farven på tekst*/
+    text-align: center;         /*sætter teksten i midten i stedet for til vesntre*/
+    text-shadow: 0 2px 3px rgba(0, 0, 0, .4);   /*tekstskygge. Offset x, offset y, feather/blur og farve. Skyggen er 2px under teskten og har en blur på 3 px.*/
+    font-size: 2vw;
+    
+}
+
+.section .text h2 {
+    font-size: 2.5vw;
+}
+
+.section .text p {
+    font-size: 24px;
+
+}
+
+.small {
+    font-size: 14px;
+}
+
+.section .left, 
+.section .right {
+    width: 50%      /*fylder lige meget så at de begge er i midten når jeg aligner dem*/
+}
+
+img {
+    height: 400px;  /*resize*/
+    width: auto;
+}
+
+.section .image {
+    padding: 25px;  /*skaber afstand*/
+}
+
+.section .text {
+    padding: 25px;
+}
+
+.left img {
+    float: right;   /*billede til højre*/
+}
+
+.right img {
+    float: left;    /*sætter billedet til venstre*/
+}
+
+.left.text {
+    text-align: right;  /*jeg er ved at blive træt af at kommentere*/
+}
+
+.right.text {
+    text-align: left;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;    /*sørger for at alle sektioner fylder hele elementet*/
+    overflow: hidden;   /*tekst går ikke ind over andre elementer*/
+    margin: auto;   /*afstand mellem elementer automatisk*/
+    padding: 0 10px;    /*10 pixel horizontal afstand mellem elementer*/
+    background: #005B8D;    /*baggrundsfarve*/
+    color: #9CDCF8; /*tekstfarve*/
+    background-size: cover; /**/
+    background-position: center;    /**/
+    min-height: 500px;  /*så den ikke er mindre end 500 pixcels*/
+    border-bottom: solid 2px rgb(0, 78, 121);   /*mørkere bund så det er nemmere at se den nye sektion*/
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    margin: auto;
+    padding: 0 10px;
+    background: #005B8D;
+    color: #9CDCF8;
+    background-size: cover;
+    background-position: center;
+    min-height: 100px;
+    border-bottom: solid 5px rgb(0, 78, 121);
+    font-size: x-large;
+}
+
+.link a {
+    text-decoration: underline;
+    text-decoration-color: rgb(35, 132, 184);
+    color: #9CDCF8;
+}
+
+.link a:hover {
+    text-decoration-color: #9CDCF8;
+}
+
+.back {
+    background-color: #005B8D;
+    background-size: cover;
+    background-position: top center;
+    border-bottom: solid 2px rgb(0, 78, 121);
+}
+
+.window {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.sim {
+    width: 60%;
+    height: 60%;
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 5px rgb(0, 78, 121);
+}
+
+.ske {
+    width: 100%;
+    height: 100%;
+}
+
+.window .title {
+    text-align: center;
+    color: #fff;
+    padding-top: 60px;
+    font-size: 2vw;
+}
+
+.settings {
+    width: 100%;    /*sørger for at alle sektioner fylder hele elementet*/
+    overflow: hidden;   /*tekst går ikke ind over andre elementer*/
+    margin: auto;   /*afstand mellem elementer automatisk*/
+    padding: 0 10px;    /*10 pixel horizontal afstand mellem elementer*/
+    background: #005B8D;    /*baggrundsfarve*/
+    color: #9CDCF8; /*tekstfarve*/
+    background-size: cover; /**/
+    background-position: center;    /**/
+    min-height: 500px;  /*så den ikke er mindre end 500 pixcels*/
+    border-bottom: solid 2px rgb(0, 78, 121);   /*mørkere bund så det er nemmere at se den nye sektion*/
+}
+
+.numb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

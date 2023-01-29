@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!--
+            Halløj Thomas
+        -->
+        <title>Coronavirus</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+        <script type="text/javascript" src="../script.js"></script>
+        
+        <!-- de næste 2 linjer er en library til javscript der hedder p5, som egentlig bare er Processing-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
+    
+        <!--Jeg har taget noget af den her kode fra https://github.com/ShaneLee/virus-simulation, og redigeret den så den passer til det jeg skal bruge.
+        Jeg lærte også meget om hvordan man implementere avanceret JavaScript i hjemmesider takker være denne github.-->
+        <script src="./simulation/coordinate.js" charset="UTF-8"></script>
+        <script src="./simulation/dot.js" charset="UTF-8"></script>
+        <script src="./simulation/sketch.js" charset="UTF-8"></script>
+        <!--ads-->
+        <script data-ad-client="ca-pub-1596302344447565" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <meta name="msapplication-TileColor" content="#b91d47">
+        <meta name="theme-color" content="#ff6ca6">
+    </head>
+
+    <body>
+        <ul id="navbar" class="navigation"> <!-- jeg bruger 'ul' elementet som min navigationsbar, som er en samling af links. -->
+            <li><a href="." class="active">Virusspredning</a></li>   <!-- ÆØÅ bliver ikke vist ordentligt så ma skal skrive det der -->
+            <li><a href="..">Coronavirus</a></li>
+        </ul>
+        <div class="back">
+            <div class="window">
+                <div class="title">
+                    <h1>Simulation over virusspredning</h1>
+                </div>
+                <div class="container">
+                    <div id="simulation" class="sim">
+                        <div id="sketch" class="ske"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll">    <!--hele sektionen hvor man scroller-->
+            <div class="settings">
+                <div class="numb">
+                    <h3 id="total"></h3>
+                    <h3 id="virus"></h3>
+                    <h3 id="healthy"></h3>
+                    <h3 id="dead"></h3>
+                    <h3 id="recover"></h3>
+                </div>
+                <div class=buttons>
+                    <input type="button" value="Start" onclick="loop()">
+                    <input type="button" value="Reset" onclick="resetSketch()">
+                    <input type="range" min="1" max="500" value="200" id="popuslider" oninput="updateExt()">                    
+                    <h4 id="popul">test</h4>
+                    <p>Folk vasker hænder: <input type="checkbox" id="wash" onclick="updateCheckboxes()"></p>
+                    <p>Folk hoster i ærmet: <input type="checkbox" id="cough" onclick="updateCheckboxes()"></p>
+                    <p>Folk undgår håndtryk: <input type="checkbox" id="hand" onclick="updateCheckboxes()"></p>
+                    <p>Folk gør hyppigt rent: <input type="checkbox" id="clean" onclick="updateCheckboxes()"></p>
+                    <p>Folk holder afstand til hinanden: <input type="checkbox" id="distance" onclick="updateCheckboxes()"></p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="link">
+                    <a href="https://www.sst.dk/da/corona" target="_blank">L&aelig;s mere p&aring; Sundhedsstyrelsens hjemmeside ⟶</a>
+                </div>  
+                                    <!--target: "_blank" åbner i en ny fane-->
+            </div>
+        </div>
+    </body>
+</html>

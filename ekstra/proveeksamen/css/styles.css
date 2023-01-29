@@ -1,0 +1,214 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+
+html {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+#navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #F5BC6E;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    height: 75px;
+    font-size: 200%;
+}
+
+li {
+    float: left;
+}
+
+.pf {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+li {
+    height: 100%;
+}
+
+a {
+    height: 100%;
+}
+
+.pfp {
+    height: 75%;
+    width: auto;
+}
+
+li a:hover {
+    color: black;
+}
+
+.page {
+    background-image: url(../img/bg.jpg);
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.main {
+    width: 100%;
+    min-height: 200vh;
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    overflow: hidden;
+    background-color: #ffd686;
+    border-bottom: 2px solid rgb(54, 54, 54);
+    border-right: 2px solid rgb(54, 54, 54);
+    border-bottom-right-radius: 25px;
+    z-index: 2;
+    font-size: larger;
+}
+
+#sidebar {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin-top:80px;
+    padding-left: 15px;
+    padding-bottom: 0px;
+    margin-right: 15px;
+    line-height: 35px;
+}
+
+.records {
+    margin-left: 175px;
+    margin-top: 100px;
+    width: 100%;
+    position: relative;
+}
+
+.recordContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+}
+
+.record {
+    width: 15%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+}
+
+.record:hover {
+    cursor: pointer;
+}
+
+.recordimage {
+    margin-top: 20px;
+    width: 70%;
+    border-radius: 50%;
+}
+
+.song {
+    margin: 5px;
+    text-align: center;
+}
+
+.info {
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.recordInformation {
+    background-color: #fff4e6;
+    border-radius: 20px;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+.image * {
+    width: 95%;
+    border-radius: 50%;
+    padding: 2.5%;
+}
+
+.songInformation {
+    width: 40%;
+    padding: 2.5%;
+}
+
+.priceInformation {
+    padding-top: 50px;
+    padding-right: 20px;
+    float: right;
+    color: #b80808;
+}
+
+.buy {
+    background-color: #fff4e6;
+    width: 40%;
+    border-radius: 20px;
+}
+
+.title {
+    padding-left: 50px;
+}
+
+.description {
+    padding-left: 100px;
+}
+
+.buttoncontainer {
+    padding-top: 10%;
+    padding-left: 45%;
+    padding-bottom: 10%;
+}
+
+.buybutton {
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+	background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color: #f9f9f9;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	display: inline-block;
+	cursor: pointer;
+	color: #666666;
+	font-family: Arial;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 24px;
+	text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+}
+
+.login {
+    width: 50%;
+    background-color: khaki;
+}
+
+#username {
+    margin-top: 300px;
+    padding: 100px;
+}

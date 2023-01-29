@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>S&aelig;lg en plade | Vinylplader.dk</title>
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="../js/scripts.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="theme-color" content="#ff6ca6">
+</head>
+
+<body>
+    <input type="number" name="itemIDinp" placeholder="item ID" id="itemIDinput"><br>
+    <input type="number" name="sellerIDinp" placeholder="seller ID" id="sellerIDinput"><br>
+]    <input type="text" name="songNameinp" placeholder="song name" id="songNameinput"><br>
+    <input type="number" name="Priceinp" placeholder="price" id="priceinput"><br>
+    <input type="submit" value="Submit" onclick="createItem(itemID = document.getElementById('itemIDinput').value,
+                                                            sellerID = document.getElementById('sellerIDinput').value,
+                                                            songName = document.getElementById('songNameinput').value,
+                                                            price = document.getElementById('priceinput').value)">
+</body>
+
+</html>
